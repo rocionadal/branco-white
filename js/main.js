@@ -114,5 +114,38 @@
 		}
 	});
 
+	/*--/ Contact form /--*/
+	function postToGoogle() {
+		var fullName = $("#name").val();
+		var emailAddress = $("#email").val();
+		var phoneNumber = $("#phone").val();
+		var message = $("#message").val();
+		if (!fullName.match(/^[a-zA-Z ]+$/)) return;
+		if (!emailAddress.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) return;
+		if (!phoneNumber.match(/^[\d ()+-]+$/)) return;
+		if (message === '') return
+		$.ajax({
+					url: "https://docs.google.com/forms/d/1VMBNWTfeAaWxkELUyOW2llm5Agn8YyXL5aExarDPn1k/formResponse?",
+					data: {
+							"entry.698442238": fullName.replace(/\s/g,'|'),
+							"entry.1035840249": phoneNumber.replace(/\s/g,'|'),
+							"emailAddress": emailAddress.replace(/\s/g,'|'),
+							"entry.72193471": message.replace(/\s/g,'|')
+						},
+					type: "POST",
+					dataType: "xml",
+					success: function(d) {
+
+					},
+				error: function(x, y, z)
+					{
+						// $('#success-msg').show();
+						$('#form').remove();
+						$('#formSubtitle').remove();
+					}
+		});
+		return false;
+	}
+
 })(jQuery);
 
