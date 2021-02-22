@@ -1022,13 +1022,17 @@ a:hover {
   }
 }
 
-.product {
+.product {  
   background-position: center; 
   background-size: cover; 
   background-repeat: no-repeat;
   height: 300px;
   width: 300px;
   margin: 1em;
+}
+
+.product:hover {
+
 }
 
 .product-cards-container {
