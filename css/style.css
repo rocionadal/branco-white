@@ -84,7 +84,7 @@ a:hover {
 }
 
 .overlay-mf {
-  background-color: black;
+  background-color: rgb(153, 153, 153);
 }
 
 .overlay-mf {
@@ -1032,10 +1032,6 @@ a:hover {
   position: relative;
 }
 
-.product:hover {
-
-}
-
 .product-cards-container {
   display: flex;
   flex-wrap: wrap;
@@ -1079,4 +1075,11 @@ a:hover {
 .footer {
   padding: 5rem 0;
   color: #4e4e4e;
+}
+
+.banner {
+  height: 40vh;
+  background-position: center; 
+  background-size: cover; 
+  background-repeat: no-repeat;
 }
