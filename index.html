@@ -183,41 +183,54 @@
                     </h5>
                   </div>
                   <div>
-                      <form action="" method="post" role="form" class="contactForm">
-                      <div id="sendmessage">Your message has been sent. Thank you!</div>
-                      <div id="errormessage"></div>
-                      <div class="row">
-                        <div class="col-md-12 mb-3">
-                          <div class="form-group">
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Nombre completo" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                            <div class="validation"></div>
+                    <form id="form" class="js-validate card shadow-lg mb-4">
+                      <div class="card-body p-4 p-md-6">
+                        <div class="row">
+
+                          <div class="col-sm-12">
+                            <div class="js-form-message form-group">
+                              <label for="fullName" class="input-label">Nombre Completo</label>
+                              <input type="text" class="form-control" name="entry.698442238" id="fullName" placeholder="María García" aria-label="Nataly" required
+                                     data-msg="Please enter first your name">
+                            </div>
                           </div>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                          <div class="form-group">
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" data-rule="email" data-msg="Please enter a valid email" />
-                            <div class="validation"></div>
+
+                          <div class="col-sm-12">
+                            <div class="js-form-message form-group">
+                              <label for="phoneNumber" class="input-label">Número de teléfono</label>
+                              <input type="phoneNumber" class="form-control" name="entry.1035840249" id="phoneNumber" placeholder="+(54) 9 11 1234 5678" required
+                                     data-msg="Please enter a valid phone number">
+                            </div>
                           </div>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                          <div class="form-group">
-                            <input type="text" class="form-control" name="phone" id="phone" placeholder="Número de teléfono" data-msg="Please enter a valid phone number" />
-                            <div class="validation"></div>
+
+                          <div class="col-sm-12">
+                            <div class="js-form-message form-group">
+                              <label for="emailAddress" class="input-label">Correo Electrónico</label>
+                              <input type="email" class="form-control" name="emailAddress" id="emailAddress" placeholder="maria@gmail.com" aria-label="alex@pixeel.com" required
+                                     data-msg="Please enter a valid email address">
+                            </div>
                           </div>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                          <div class="form-group">
-                            <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Mensaje"></textarea>
-                            <div class="validation"></div>
+        
+                          <div class="col-sm-12">
+                            <div class="js-form-message form-group">
+                              <label for="message" class="input-label">Mensaje</label>
+                              <div class="input-group">
+                                <textarea class="form-control" rows="4" name="entry.72193471" id="message" placeholder="Hola! Me gustaria..." aria-label="Hi there, I would like to ..." required
+                                          data-msg="Please enter a reason."></textarea>
+                              </div>
+                            </div>
                           </div>
+
                         </div>
-                        <div class="col-md-12">
-                          <button type="submit" onclick="return postToGoogle();" class="button button-a button-big button-rouded">Send Message</button>
-                        </div>
+                        <button id="submitButton" onclick="return postToGoogle();" class="btn btn-block btn-dark transition-3d-hover">Enviar</button>
                       </div>
                     </form>
+                    <div class="text-center" id="formSubtitle">
+                      <p class="small">Nos pondremos en contacto contigo lo antes posible.</p>
+                    </div>
                   </div>
                 </div>
+
                 <div class="col-md-6">
                   <div class="title-box-2 pt-4 pt-md-0">
                     <h5 class="title-left">
@@ -229,14 +242,6 @@
                       <li><span class="ion-ios-location"></span> Argentina, Buenos Aires</li>
                       <li><span class="ion-ios-telephone"></span> (+54) 11 4991 8574</li>
                       <li><span class="ion-email"></span> contacto@brancowhite.com</li>
-                    </ul>
-                  </div>
-                  <div class="socials">
-                    <ul>
-                      <!-- <li><a href=""><span class="ico-circle"><i class="ion-social-facebook"></i></span></a></li> -->
-                      <li><a href="https://www.instagram.com/brancowhite.bags/" target="_blank"><span class="ico-circle"><i class="ion-social-instagram"></i></span></a></li>
-                      <!-- <li><a href=""><span class="ico-circle"><i class="ion-social-twitter"></i></span></a></li>
-                      <li><a href=""><span class="ico-circle"><i class="ion-social-pinterest"></i></span></a></li> -->
                     </ul>
                   </div>
                 </div>
@@ -265,7 +270,84 @@
   <script src="lib/owlcarousel/owl.carousel.min.js"></script>
   <script src="lib/lightbox/js/lightbox.min.js"></script>
   <script src="lib/typed/typed.min.js"></script>
+  <script>
+    $(document).on('ready', function () {
+      // initialization of header
+      var header = new HSHeader($('#header')).init();
 
+      // initialization of mega menu
+      var megaMenu = new HSMegaMenu($('.js-mega-menu'), {
+        desktop: {
+          position: 'left'
+        }
+      }).init();
+
+      // initialization of unfold
+      // var unfold = new HSUnfold('.js-hs-unfold-invoker').init();
+
+      // initialization of show animations
+      $('.js-animation-link').each(function () {
+        var showAnimation = new HSShowAnimation($(this)).init();
+      });
+
+      // initialization of form validation
+      $('.js-validate').each(function() {
+        $.HSCore.components.HSValidation.init($(this), {
+          rules: {
+            confirmPassword: {
+              equalTo: '#signupPassword'
+            }
+          }
+        });
+      });
+
+      // initialization of leaflet
+      $('#map').each(function () {
+        var leaflet = $.HSCore.components.HSLeaflet.init($(this)[0]);
+
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+          id: 'mapbox/light-v9'
+        }).addTo(leaflet);
+      });
+
+      // initialization of go to
+      $('.js-go-to').each(function () {
+        var goTo = new HSGoTo($(this)).init();
+      });
+    });
+
+    function postToGoogle() {
+      var fullName = $("#fullName").val();
+      var emailAddress = $("#emailAddress").val();
+      var phoneNumber = $("#phoneNumber").val();
+      var message = $("#message").val();
+      if (!fullName.match(/^[a-zA-Z ]+$/)) return;
+      if (!emailAddress.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) return;
+      if (!phoneNumber.match(/^[\d ()+-]+$/)) return;
+      if (message === '') return
+      $.ajax({
+            url: "https://docs.google.com/forms/d/1VMBNWTfeAaWxkELUyOW2llm5Agn8YyXL5aExarDPn1k/formResponse?",
+            data: {
+                "entry.698442238": fullName.replace(/\s/g,'|'),
+                "entry.1035840249": phoneNumber.replace(/\s/g,'|'),
+                "emailAddress": emailAddress.replace(/\s/g,'|'),
+                "entry.72193471": message.replace(/\s/g,'|')
+              },
+            type: "POST",
+            dataType: "xml",
+            success: function(d) {
+
+            },
+          error: function(x, y, z)
+            {
+              // $('#success-msg').show();
+              $('#form').remove();
+              $('#formSubtitle').remove();
+            }
+      });
+      return false;
+    }
+  </script>
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>
 
